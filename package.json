@@ -1,7 +1,6 @@
 {
   "name": "clean-node-api",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -11,5 +10,10 @@
   "license": "ISC",
   "dependencies": {
     "git-commit-msg-linter": "^5.0.7"
-  }
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.26",
+    "typescript": "^5.4.2"
+  },
+  "description": ""
 }
