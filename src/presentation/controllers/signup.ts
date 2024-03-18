@@ -22,8 +22,8 @@ export class SignUpController implements Controller {
         return badRequest(new MissingParamError(field))
       }
     }
-    // Desabilitando a checagem de tipos da linha abaixo pois: isValid espera uma string, porém, httpRequest.body é do tipo:
-    // any, já que não sabemos que informações o cliente irá retornar através do body, o que causa um erro de typagem
+    // Desabilitando a checagem de tipos da linha abaixo pois: isValid espera uma string, porém, httpRequest.body é do tipo any,
+    // já que não sabemos que informações o cliente irá retornar através do body, o que causa um erro de typagem
     // nas novas atualizações do typescript, visto que isValid(string) está recebendo isValid(any).
     // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
     const isValid = this.emailValidator.isValid(httpRequest.body.email)
