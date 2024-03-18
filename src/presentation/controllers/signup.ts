@@ -1,4 +1,4 @@
-import { MissingParamError, InvalidParamError } from '../errors'
+import { MissingParamError, InvalidParamError, InvalidPasswordConfirmationError } from '../errors'
 import { badRequest, serverError } from '../helpers/http-helpers'
 import type { HttpRequest, HttpResponse, EmailValidator } from '../protocols'
 import type { Controller } from '../protocols/controller'
@@ -20,6 +20,9 @@ export class SignUpController implements Controller {
         if (!httpRequest.body[field]) {
           return badRequest(new MissingParamError(field))
         }
+      }
+      if (httpRequest.body.password !== httpRequest.body.passwordConfirmation) {
+        return badRequest(new InvalidPasswordConfirmationError('passwordConfirmation'))
       }
       // Desabilitando a checagem de tipos da linha abaixo pois: isValid espera uma string, porém, httpRequest.body é do tipo any,
       // já que não sabemos que informações o cliente irá retornar através do body, o que causa um erro de typagem
