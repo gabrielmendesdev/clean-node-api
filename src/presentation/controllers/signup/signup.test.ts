@@ -1,8 +1,6 @@
 import { SignUpController } from './signup'
-import { MissingParamError, InvalidParamError, ServerError, InvalidPasswordConfirmationError } from '../errors'
-import type { AccountModel } from '../../domain/models/account'
-import type { AddAcount, AddAccountModel } from '../../domain/usecases/add-account'
-import type { EmailValidator } from '../protocols'
+import { MissingParamError, InvalidParamError, ServerError, InvalidPasswordConfirmationError } from '../../errors'
+import type { EmailValidator, AddAcount, AccountModel, AddAccountModel } from './signup-protocols'
 
 const makeEmailValidator = (): EmailValidator => {
   class EmailValidatorStub implements EmailValidator {
@@ -151,7 +149,7 @@ describe('SignUp Controller', () => {
     expect(httpResponse.body).toEqual(new ServerError())
   })
 
-  test('Should return 400 if password confirmation is different of password', () => {
+  test('Should return 400 if password confirmation is different from the password', () => {
     const { sut } = makeSut()
     const httpRequest = {
       body: {
